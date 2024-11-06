@@ -4,6 +4,7 @@ function Dictionary() {
   const [searchedWord, setSearchedWord] = useState("");
   const [def, setDef] = useState("");
   const [found, setFound] = useState(false);
+  const [searched, setSearched] = useState(false);
   const dictionary = [
     {
       word: "React",
@@ -14,13 +15,16 @@ function Dictionary() {
   ];
 
   const handleSearch = (searchedWord) => {
-    const result = dictionary.find((ele) => ele.word === searchedWord);
+    const result = dictionary.find((ele) => ele.word.toLowerCase() === searchedWord.toLowerCase());
     if (result) {
       setDef(result.meaning);
       setFound(true);
+      setSearched(true);
+      //setSearchedWord("");
     } else {
       setDef("");
       setFound(false);
+      setSearched(true);
     }
   };
 
@@ -36,7 +40,7 @@ function Dictionary() {
         Search
       </button>
       <h5>Definition:</h5>
-      {searchedWord && <p>{found ? def : "Word not found in the dictionary."}</p>}
+      {searched && <p>{found ? def : "Word not found in the dictionary."}</p>}
     </div>
   );
 }
